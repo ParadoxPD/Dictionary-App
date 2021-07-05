@@ -30,6 +30,8 @@ class _AnimationScreen extends State<AnimationScreen>
 
   bool firstAnim = false;
   bool secondAnim = false;
+  bool thirdAnim = false;
+  bool fourthAnim = false;
   void initState() {
     super.initState();
     Timer(Duration(milliseconds: 500), () {
@@ -37,21 +39,48 @@ class _AnimationScreen extends State<AnimationScreen>
         firstAnim = !firstAnim;
       });
     });
-    Timer(Duration(milliseconds: 2500), () {
+    Timer(Duration(milliseconds: 1300), () {
       setState(() {
         secondAnim = !secondAnim;
       });
     });
+    Timer(Duration(milliseconds: 2100), () {
+      setState(() {
+        thirdAnim = !thirdAnim;
+      });
+    });
+    Timer(Duration(milliseconds: 3200), () {
+      setState(() {
+        fourthAnim = !fourthAnim;
+      });
+    });
+    Timer(Duration(milliseconds: 5400), () {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        squareAnim(),
-      ],
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[squareAnimTransform(), wordAnim()],
     );
+  }
+
+  Widget wordAnim() {
+    return AnimatedOpacity(
+      opacity: fourthAnim ? 1 : 0,
+      duration: Duration(seconds: 2),
+      child: Transform.translate(
+        offset: Offset(0, _width / 2 - 11),
+        child: Container(
+          child: Image.asset('assets/iction.png'),
+        ),
+      ),
+    );
+  }
+
+  Widget squareAnimTransform() {
+    return Transform.translate(offset: Offset(-68, 0), child: squareAnim());
   }
 
   Widget squareAnim() {
@@ -60,17 +89,29 @@ class _AnimationScreen extends State<AnimationScreen>
         width: !firstAnim ? _width - 68 : _width,
         height: _height,
         color: Color(0xffFFA000),
-        duration: const Duration(seconds: 2),
-        curve: Curves.fastOutSlowIn,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.easeOut,
         child: AnimatedPadding(
           padding: !secondAnim
               ? EdgeInsets.fromLTRB(
                   _width / 2, _height / 2, _width / 2, _height / 2)
               : EdgeInsets.all(3),
-          duration: const Duration(seconds: 2),
+          duration: const Duration(milliseconds: 800),
           curve: Curves.fastOutSlowIn,
           child: Container(
             color: Color(0xff333337),
+            child: AnimatedOpacity(
+              curve: Curves.easeIn,
+              duration: Duration(milliseconds: 800),
+              opacity: !thirdAnim ? 0 : 1,
+              child: Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  'assets/D.png',
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
           ),
         ),
       ),
