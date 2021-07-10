@@ -36,7 +36,9 @@ class _MainPage extends State<MainPage> {
         ),
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0, // this will be set when a new tab is tapped
+          onTap: onTabTapped, // new
+          currentIndex:
+              _currentIndex, // this will be set when a new tab is tapped
           items: [
             BottomNavigationBarItem(
               icon: new Icon(Icons.home),
@@ -69,7 +71,7 @@ class FirstPage extends StatefulWidget {
   _FirstPage createState() => _FirstPage();
 }
 
-class _FirstPage extends State<FirstPage> {
+class _FirstPage extends State<FirstPage> with WidgetsBindingObserver {
   FocusNode searchBoxFocus = new FocusNode();
   bool isSearching = false;
 
@@ -78,6 +80,27 @@ class _FirstPage extends State<FirstPage> {
     super.initState();
     searchBoxFocus = new FocusNode();
     searchBoxFocus.addListener(_onOnFocusNodeEvent);
+    // WidgetsBinding.instance.addObserver(this);
+  }
+
+  // @override
+  // void didChangeMetrics() {
+  //   super.didChangeMetrics();
+  //   final value = WidgetsBinding.instance.window.viewInsets.bottom;
+  //   print(value);
+  //   if (value == 0) {
+  //     if (isSearching) {
+  //       print("Back");
+  //     }
+  //     // isSearching = !isSearching;
+  //   }
+  // }
+
+  @override
+  void dispose() {
+    // WidgetsBinding.instance.removeObserver(this);
+    searchBoxFocus.dispose();
+    super.dispose();
   }
 
   _onOnFocusNodeEvent() {
