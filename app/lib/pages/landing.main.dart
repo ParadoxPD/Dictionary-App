@@ -70,22 +70,50 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPage extends State<FirstPage> {
-  FocusNode searchedWord = new FocusNode();
+  FocusNode searchBoxFocus = new FocusNode();
   bool isSearching = false;
+
+  @override
+  void initState() {
+    super.initState();
+    searchBoxFocus = new FocusNode();
+    searchBoxFocus.addListener(_onOnFocusNodeEvent);
+  }
+
+  _onOnFocusNodeEvent() {
+    setState(() {
+      if (searchBoxFocus.hasFocus)
+        isSearching = true;
+      else
+        isSearching = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: mainBody(context),
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: mainBody(context),
+      ),
     );
   }
 
   Widget mainBody(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          setState(() {
-            isSearching = !isSearching;
-          });
+          FocusScopeNode currentFocus = FocusScope.of(context);
+
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
         },
         child: Container(
           color: Color(0xff333337),
@@ -105,15 +133,17 @@ class _FirstPage extends State<FirstPage> {
   Widget searchBox(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          isSearching = !isSearching;
-        });
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 200),
         height: !isSearching
-            ? 0.4 * MediaQuery.of(context).size.height
-            : 0.5 * MediaQuery.of(context).size.height,
+            ? 0.35 * MediaQuery.of(context).size.height
+            : 0.45 * MediaQuery.of(context).size.height,
         margin: EdgeInsets.fromLTRB(30, 50, 30, 30),
         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
         decoration: BoxDecoration(
@@ -134,7 +164,7 @@ class _FirstPage extends State<FirstPage> {
               margin: EdgeInsets.only(top: 10, left: 10, right: 10),
               padding: EdgeInsets.zero,
               child: TextField(
-                focusNode: searchedWord,
+                focusNode: searchBoxFocus,
                 style: TextStyle(color: Colors.white, fontSize: 20),
                 decoration: InputDecoration(
                   focusedBorder: new OutlineInputBorder(
@@ -184,9 +214,10 @@ class _FirstPage extends State<FirstPage> {
   Widget wordOfTheDay(BuildContext context) {
     return AnimatedOpacity(
       opacity: isSearching ? 0 : 1,
-      duration: Duration(milliseconds: 500),
-      child: Container(
-        height: 0.2 * MediaQuery.of(context).size.height,
+      duration: Duration(milliseconds: 200),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 200),
+        height: !isSearching ? 0.2 * MediaQuery.of(context).size.height : 0,
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.fromLTRB(30, 0, 30, 30),
         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
