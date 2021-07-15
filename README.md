@@ -1,2 +1,5 @@
-# Dictionary-App
-Flutter Dictionary App
+# Diction - The dictionary app for the cool kids😎
+
+## Description :
+    
+    
