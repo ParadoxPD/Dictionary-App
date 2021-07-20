@@ -192,7 +192,35 @@ class _DictionaryPage extends State<DictionaryPage>
             ),
           ],
         ),
-        child: Text("Word"),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 5, left: 15),
+                    width: 3,
+                    height: 18,
+                    color: Color(0xff9E9EA5),
+                  ),
+                  Text(
+                    "Word of the day",
+                    style: TextStyle(color: Color(0xff9E9EA5), fontSize: 18),
+                  ),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 30, top: 20),
+                child: Text(
+                  "Apple",
+                  style: TextStyle(color: Color(0xffFFA000), fontSize: 44),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
