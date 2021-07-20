@@ -44,6 +44,9 @@ class _MainPage extends State<MainPage> {
         ),
         body: _children[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Color(0xff0C0404),
+          selectedItemColor: Color(0xffFFA000),
+          unselectedItemColor: Color(0xff656565),
           onTap: onTabTapped, // new
           currentIndex:
               _currentIndex, // this will be set when a new tab is tapped
@@ -53,12 +56,12 @@ class _MainPage extends State<MainPage> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.mail),
-              label: 'Messages',
+              icon: new Icon(Icons.history),
+              label: 'History',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
+              icon: Icon(Icons.settings),
+              label: 'Settings',
             ),
           ],
         ),
