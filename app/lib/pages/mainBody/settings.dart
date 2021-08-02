@@ -36,7 +36,8 @@ class _SettingsPage extends State<SettingsPage> {
                   "Font",
                   Text(
                     "A",
-                    style: TextStyle(fontSize: _fontSliderValue),
+                    style: TextStyle(
+                        fontSize: _fontSliderValue, color: Colors.white),
                   ), (double value) {
                 setState(() {
                   _fontSliderValue = value;
@@ -48,7 +49,8 @@ class _SettingsPage extends State<SettingsPage> {
                   "No. of words in history",
                   Text(
                     _noOfWordsInHistory.toString(),
-                    style: TextStyle(fontSize: _fontSliderValue),
+                    style: TextStyle(
+                        fontSize: _fontSliderValue, color: Colors.white),
                   ), (double value) {
                 setState(() {
                   _noOfWordsInHistory = value.toInt();
@@ -63,17 +65,36 @@ class _SettingsPage extends State<SettingsPage> {
   Widget createSlider(BuildContext context, double _value, String title,
       Text sideText, _onChanged) {
     return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xff333337),
+        border: Border.all(
+          color: Color(0xff707070),
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(0),
+      ),
+      margin: EdgeInsets.only(top: 30, left: 15, right: 15),
       child: Column(
         children: [
-          Align(
-              child: Text(
-            title,
-            textAlign: TextAlign.left,
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          )),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  title,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                )),
+          ),
           Row(
             children: [
-              Slider(value: _value, min: 0, max: 100, onChanged: _onChanged),
+              SliderTheme(
+                  data: SliderThemeData(
+                      thumbColor: Color(0xff3E3E3F),
+                      activeTrackColor: Color(0xffCDCDCD),
+                      inactiveTrackColor: Color(0xff3E3E3F)),
+                  child: Slider(
+                      value: _value, min: 0, max: 100, onChanged: _onChanged)),
               sideText
             ],
           ),
