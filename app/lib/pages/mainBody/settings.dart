@@ -56,7 +56,7 @@ class _SettingsPage extends State<SettingsPage> {
                     style: TextStyle(
                         fontSize: _fontSliderValue, color: Colors.white),
                   ),
-                  {'min': 0, 'max': 50}, (double value) {
+                  {'min': 5, 'max': 50}, (double value) {
                 setState(() {
                   _noOfWordsInHistory = value.toInt();
                 });

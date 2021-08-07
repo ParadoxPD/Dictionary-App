@@ -175,7 +175,7 @@ class _DictionaryPage extends State<DictionaryPage>
       opacity: isSearching ? 0 : 1,
       duration: Duration(milliseconds: 200),
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 10),
         height: !isSearching ? 0.2 * MediaQuery.of(context).size.height : 0,
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.fromLTRB(30, 0, 30, 30),
