@@ -16,79 +16,70 @@ class _SettingsPage extends State<SettingsPage> {
   }
 
   Widget mainBody(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          FocusScopeNode currentFocus = FocusScope.of(context);
-
-          if (!currentFocus.hasPrimaryFocus) {
-            currentFocus.unfocus();
-          }
-        },
-        child: Container(
-          color: Color(0xff333337),
-          child: Column(
-            children: [
-              Container(
-                color: Color(0xff656565),
-                height: 10,
-              ),
-              createSlider(
-                  context,
-                  _fontSliderValue,
-                  "Font",
-                  Text(
-                    "A",
-                    style: TextStyle(
-                        fontSize: _fontSliderValue, color: Colors.white),
-                  ),
-                  {'min': 15, 'max': 39}, (double value) {
-                // print(_fontSliderValue);
-                setState(() {
-                  _fontSliderValue = value;
-                });
-              }),
-              createSlider(
-                  context,
-                  _noOfWordsInHistory * 1.0,
-                  "No. of words in history",
-                  Text(
-                    _noOfWordsInHistory.toString(),
-                    style: TextStyle(
-                        fontSize: _fontSliderValue, color: Colors.white),
-                  ),
-                  {'min': 5, 'max': 50}, (double value) {
-                setState(() {
-                  _noOfWordsInHistory = value.toInt();
-                });
-              }),
-              Container(
-                margin: EdgeInsets.only(top: 30, left: 15, right: 15),
-                padding:
-                    EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 20),
-                decoration: BoxDecoration(
-                    color: const Color(0xff333337),
-                    border: Border.all(
-                      color: Color(0xff707070),
-                      width: 1,
-                    )),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Word of the day",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          color: Colors.white, fontSize: _fontSliderValue),
-                    ),
-                    Container(
-                      child: toogleSwitch(context),
-                    )
-                  ],
-                ),
-              )
-            ],
+    return Container(
+      color: Color(0xff333337),
+      child: Column(
+        children: [
+          Container(
+            color: Color(0xff656565),
+            height: 10,
           ),
-        ));
+          createSlider(
+              context,
+              _fontSliderValue,
+              "Font",
+              Text(
+                "A",
+                style:
+                    TextStyle(fontSize: _fontSliderValue, color: Colors.white),
+              ),
+              {'min': 15, 'max': 39}, (double value) {
+            // print(_fontSliderValue);
+            setState(() {
+              _fontSliderValue = value;
+            });
+          }),
+          createSlider(
+              context,
+              _noOfWordsInHistory * 1.0,
+              "No. of words in history",
+              Text(
+                _noOfWordsInHistory.toString(),
+                style:
+                    TextStyle(fontSize: _fontSliderValue, color: Colors.white),
+              ),
+              {'min': 5, 'max': 50}, (double value) {
+            setState(() {
+              _noOfWordsInHistory = value.toInt();
+            });
+          }),
+          Container(
+            margin: EdgeInsets.only(top: 30, left: 15, right: 15),
+            padding: EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 20),
+            decoration: BoxDecoration(
+                color: const Color(0xff333337),
+                border: Border.all(
+                  color: Color(0xff707070),
+                  width: 1,
+                )),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Word of the day",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      color: Colors.white, fontSize: _fontSliderValue),
+                ),
+                Container(
+                  child: toogleSwitch(context),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Widget createSlider(BuildContext context, double _value, String title,
