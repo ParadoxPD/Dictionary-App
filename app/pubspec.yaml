@@ -49,6 +49,13 @@ flutter:
     - assets/D.png
     - assets/iction.png
     - assets/icon.png
+    - assets/study.png
+    - assets/settings.png
+    - assets/settings-yellow.png
+    - assets/home.png
+    - assets/home-yellow.png
+    - assets/history.png
+    - assets/history-yellow.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

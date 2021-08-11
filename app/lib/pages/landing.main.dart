@@ -11,7 +11,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPage extends State<MainPage> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   final List<Widget> _children = [
     DictionaryPage(),
     HistoryPage(),
@@ -52,16 +52,22 @@ class _MainPage extends State<MainPage> {
               _currentIndex, // this will be set when a new tab is tapped
           items: [
             BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
-              label: 'Home',
+              icon: _currentIndex == 0
+                  ? Image.asset('assets/home-yellow.png')
+                  : Image.asset('assets/home.png'),
+              label: '',
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.history),
-              label: 'History',
+              icon: _currentIndex == 1
+                  ? Image.asset('assets/history-yellow.png')
+                  : Image.asset('assets/history.png'),
+              label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
+              icon: _currentIndex == 2
+                  ? Image.asset('assets/settings-yellow.png')
+                  : Image.asset('assets/settings.png'),
+              label: '',
             ),
           ],
         ),
